@@ -24,7 +24,6 @@ Partial Class Siniestros_ResumenOPMasivo
 
             GridView1.DataSource = oTabla
 
-
             GridView1.DataBind()
         End If
 
@@ -72,4 +71,22 @@ Partial Class Siniestros_ResumenOPMasivo
 
         Funciones.EjecutaFuncion("window.open('" & server & "');")
     End Sub
+
+    Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
+        Dim ws As New ws_Generales.GeneralesClient
+        Dim server As String = ws.ObtieneParametro(9)
+        Dim Random As New Random()
+        Dim numero As Integer = Random.Next(1, 1000)
+        Dim Num_Lote As String
+        Num_Lote = Request.QueryString("Num_Lote")
+        Dim RptFilters As String
+        RptFilters = "&NumLote=" & Num_Lote
+        server = Replace(Replace(server, "@Reporte", "ResumenOP"), "@Formato", "EXCEL")
+        server = Replace(server, "ReportesGMX_UAT", "ReportesOPSiniestros")
+        server = server & RptFilters
+        Funciones.EjecutaFuncion("window.open('" & server & "');")
+
+    End Sub
+
+
 End Class

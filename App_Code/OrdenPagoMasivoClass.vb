@@ -71,6 +71,8 @@ Public Class OrdenPagoMasivoClass
     Private _Cod_concepto_pago As String
     Private _Cod_clas_pago As String
     Private _Cod_tipo_pago As String
+    Private _Poliza As String
+
 
 
 
@@ -660,6 +662,15 @@ Public Class OrdenPagoMasivoClass
         End Get
         Set(value As String)
             _Cod_tipo_pago = value
+        End Set
+    End Property
+
+    Public Property Poliza As String
+        Get
+            Return _Poliza
+        End Get
+        Set(value As String)
+            _Poliza = value
         End Set
     End Property
 End Class

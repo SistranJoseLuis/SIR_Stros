@@ -3,6 +3,7 @@
 
 
 
+
    
     
     var res = { '0': 'Sin Informacion' };
@@ -34,7 +35,7 @@
         var RFC = $("[id*=txtRFC]").val();
         var SubSiniestro = $("[id*=cmbSubsiniestro]").val();
 
-
+        RFC = RFC.replace("&", "!");
         
 
         if (txt_fecha_fin == "")
@@ -331,11 +332,12 @@
     
                                 data: mydata,
                                 datatype: "local",
+
                                 height: 280,
                                 width: 1024,
                                 rowNum: 8000,
                                 rowList: [10, 20, 30],
-                                colNames: ['Folio Onbase', 'Num Pago', 'Tipo de comprobante', 'Pagar A', 'Codigo', 'RFC', 'Nombre /Razon Social', 'Siniestro', 'Subsinientro', 'Moneda', 'Tipo de Cambio', 'Reserva', 'Moneda de Pago', 'Importe', 'Deducible', 'Importe del concepto', 'Conceptp Facturado','cod_clas_Pago' ,'Clase de Pago','cod_concepto_pago' ,'Concepto de pago', 'cod_tipo_pago','Tipo de Pago', 'Concepto 2', 'Tipo de Pago', 'Folio Onbase Estado de cuenta', 'Cuenta Bancaria', 'Confirmar Cuenta ', 'Solicitante', 'Notas', 'Observaciones', 'id_tipo_Doc', 'moneda', 'moneda pago', 'FolioOnbaseHidden', 'Id_persona', '', '', , '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','','Accion'],
+                                colNames: ['Folio Onbase', 'Num Pago', 'Tipo de comprobante', 'Pagar A', 'Codigo', 'RFC', 'Nombre /Razon Social', 'Siniestro', 'Subsinientro', 'Moneda', 'Tipo de Cambio', 'Reserva', 'Moneda de Pago', 'Importe', 'Deducible', 'Importe del concepto', 'Conceptp Facturado','cod_clas_Pago' ,'Clase de Pago','cod_concepto_pago' ,'Concepto de pago', 'cod_tipo_pago','Tipo de Pago', 'Concepto 2', 'Tipo de Pago', 'Folio Onbase Estado de cuenta', 'Cuenta Bancaria', 'Confirmar Cuenta ', 'Solicitante', 'Notas', 'Observaciones', 'id_tipo_Doc', 'moneda', 'moneda pago', 'FolioOnbaseHidden', 'Id_persona', '', '', , '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','','Poliza','Accion'],
                                 colModel: [
                 
                                     { name: 'Folio_Onbase', index: 'Folio_Onbase', width: 100, frozen: false },
@@ -401,8 +403,8 @@
                                     { name: 'Concepto2', index: 'Concepto2', width: 180, editable: true, hidden: true, editoptions: { size: "30", maxlength: "100" } },
                                     { name: 'Tipo_Pago2', index: 'Tipo_Pago2', width: 90, hidden: true },
                                     { name: 'Folio_Onbase_Cuenta', index: 'Folio_Onbase_Cuenta', width: 90 },
-                                    { name: 'Cuenta_Bancaria', index: 'Cuenta_Bancaria', width: 180, editable: true, editoptions: { size: "30", maxlength: "100" } },
-                                    { name: 'Confirmar_Cuenta', index: 'Confirmar_Cuenta', width: 180, editable: true, editoptions: { size: "30", maxlength: "100" } },
+                                    { name: 'Cuenta_Bancaria', index: 'Cuenta_Bancaria', width: 180, editable: false, editoptions: { size: "30", maxlength: "18" } },
+                                    { name: 'Confirmar_Cuenta', index: 'Confirmar_Cuenta', width: 180, editable: false, editoptions: { size: "30", maxlength: "18" } },
                                     { name: 'Solicitante', index: 'Solicitante', width: 90 },
                                     { name: 'Notas', index: 'Notas', width: 180, editable: true, editoptions: { size: "30", maxlength: "100" } },
                                     { name: 'Observaciones', index: 'Observaciones', width: 260, editable: true, editoptions: { size: "50", maxlength: "100" } },
@@ -439,7 +441,7 @@
                                     { name: 'NumeroOficioCondusef', index: 'NumeroOficioCondusef', width: 90, hidden: true },
                                     { name: 'TipoPagoDetalle', index: 'TipoPagoDetalle', width: 90, hidden: true },
                                     { name: 'Cod_objeto', index: 'Cod_objeto', width: 90, hidden: true },
-
+                                    { name: 'Poliza', index: 'Poliza', width: 90, hidden: true },
 
 
 
@@ -454,7 +456,7 @@
                                         name: 'myac', width: 60, fixed: true, sortable: false, resize: false, formatter: 'actions',
                                         formatoptions: { keys: true }, frozen: false 
                                     },
-
+                                    
 
                                 ],
                                 onSelectRow: function (id) {
@@ -473,10 +475,23 @@
                                     var TipoUsuario = jQuery("#list47").jqGrid('getRowData', id).PagarA;                                    
                                     var CodigoPres = jQuery("#list47").jqGrid('getRowData', id).CodigoCliente;
                                     var id_tipo_pago = jQuery("#list47").jqGrid('getRowData', id).TipoPagoDetalle
-
+                                    var poliza = jQuery("#list47").jqGrid('getRowData', id).Poliza;  
                                     var Concepto_Pago = jQuery("#list47").jqGrid('getRowData', id).Concepto_Pago
 
                                     
+                                    if (TipoUsuario == "Proveedor") {
+                                        jQuery("#list47").setColProp('Cuenta_Bancaria', { editable: false });
+                                        jQuery("#list47").setColProp('Confirmar_Cuenta', { editable: false });
+
+                                    }
+                                    else
+                                    {
+                                        jQuery("#list47").setColProp('Cuenta_Bancaria', { editable: true });
+                                        jQuery("#list47").setColProp('Confirmar_Cuenta', { editable: true });
+
+                                    }
+                                
+
 
                                     var row = $(id.target).closest('tr.jqgrow');
 
@@ -519,14 +534,102 @@
                                         }
                                     });
 
-                                    
-                                    jQuery("#list47").editRow(id, true, null, null, '../LocalServices/OrdenPagoMasiva.asmx/Apoyo', null,
+
+
+
+                                    if (TipoUsuario == "Asegurado") {
+                                        jQuery("#list47").setColProp('Nombre_Razon_Social', {
+                                            editable: true, edittype: "select", editoptions: {
+                                                value: res, dataEvents: [
+                                                    {
+                                                        type: 'change',
+                                                        fn: function (e) {
+                                                            var v = parseInt($(e.target).val(), 10);
+
+
+
+
+
+                                                            var row = $(e.target).closest('tr.jqgrow');
+                                                            var rowId = row.attr('id');
+
+
+
+
+
+                                                            jQuery("#list47").jqGrid('setCell', rowId, 'CodigoCliente', v);
+
+
+
+
+
+
+                                                        }
+                                                    }
+                                                ] }});
+
+                                        
+
+                                        
+
+                                        $.ajax({
+                                            url: "../Siniestros/Catalogos.ashx?Catalgo=FigurasPoliza&Poliza=" + poliza,
+                                            dataType: "json",
+                                            type: "POST",
+                                            contentType: "application/json; charset=utf-8",
+                                            success: function (result) {
+
+                                              
+                                                var s = '<option value="0">Seleccione valor</option>';
+
+                                                for (var i = 0; i < result.length; i++) {
+
+
+                                                    if (Concepto_Pago == result[i].Descripcion) {
+                                                        s += '<option value="' + result[i].cod_aseg + '"  selected = "selected">' + result[i].nombre + '</option>';
+                                                    }
+                                                    else {
+                                                        s += '<option value="' + result[i].cod_aseg + '">' + result[i].nombre + '</option>';
+                                                    }
+
+
+                                                }
+
+
+                                                res = s;
+                                                $("select#" + id + "_Nombre_Razon_Social", row[0]).html(res);
+
+
+
+                                            },
+                                            error: function (err) {
+                                                debugger
+                                                alert(err);
+
+                                            }
+                                        });
+
+
+
+
+                                    }
+
+
+
+
+
+
+                                    jQuery("#list47").editRow(id, true, null, null, '../LocalServices/OrdenPagoMasiva.asmx/Apoyo', null,                                            
                                         function (rowid, response) {  // aftersavefunc
                                           //  grid.setColProp('State', { editoptions: { value: states } });
-                                           
+                                                                              
+                                            jQuery("#list47").setColProp('Cuenta_Bancaria', { editable: false });
+                                            jQuery("#list47").setColProp('Confirmar_Cuenta', { editable: false });                                               
                         
                         
                                         });
+                                    
+                                    
                                     return;
                                 },
 

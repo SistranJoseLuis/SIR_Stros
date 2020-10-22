@@ -13,6 +13,7 @@ Public Class OrdenPagoMasivo : Implements IHttpHandler
 
 
 
+
         Dim oDatos As DataSet
         Dim oTabla As DataTable
         Dim oParametros As New Dictionary(Of String, Object)
@@ -33,6 +34,7 @@ Public Class OrdenPagoMasivo : Implements IHttpHandler
         Dim SubSiniestro As String
         Dim cod_analista As String
         Dim VariasFacturas As String
+        Dim aux_pagaA As String
 
 
         Dim funciones As Funciones
@@ -90,7 +92,8 @@ Public Class OrdenPagoMasivo : Implements IHttpHandler
                 oParametros.Add("MonedaPago", MonedaPago)
             End If
             If RFC <> "" Then
-                oParametros.Add("RFC", RFC)
+
+                oParametros.Add("RFC", RFC.Replace("!", "&"))
             End If
 
             If SubSiniestro <> "0" Then
@@ -120,7 +123,21 @@ Public Class OrdenPagoMasivo : Implements IHttpHandler
                 OP.Folio_Onbase = "<a href=""http://172.16.40.66/AppNet/docpop/docpop.aspx?KT1419_0_0_0=" + row("Folio_Onbase").ToString() + "&clienttype=html&cqid=203""  target=""_blank""><i class=""fa fa-newspaper-o""></i>&nbsp; " + row("Folio_Onbase").ToString() + "</a>"
                 OP.Num_Pago = row("Num_Pago").ToString()
                 OP.Tipo_comprobante = row("Tipo_comprobante").ToString()
-                OP.PagarA = row("PagarA").ToString()
+
+
+
+                Select Case row("PagarA").ToString()
+                    Case "7"
+                        OP.PagarA = "Asegurado"
+                    Case "8"
+                        OP.PagarA = "Tercero"
+                    Case "10"
+                        OP.PagarA = "Proveedor"
+                End Select
+
+
+
+
                 OP.CodigoCliente = row("CodigoCliente").ToString()
                 OP.RFC = row("RFC").ToString()
                 OP.Nombre_Razon_Social = row("Nombre_Razon_Social").ToString()
@@ -134,6 +151,7 @@ Public Class OrdenPagoMasivo : Implements IHttpHandler
                 OP.Deducible = row("Deducible").ToString()
                 OP.Importe_concepto = row("Importe_concepto").ToString()
                 OP.Concepto_Factura = row("Concepto_Facturado").ToString()
+                OP.Cod_concepto_pago = row("Cod_concepto_pago").ToString()
                 OP.Concepto_Pago = row("Concepto_Pago").ToString()
                 OP.Clase_pago = row("Clase_pago").ToString()
                 OP.Tipo_Pago = row("Tipo_Pago").ToString()
@@ -178,6 +196,7 @@ Public Class OrdenPagoMasivo : Implements IHttpHandler
                 OP.NumeroOficioCondusef = row("NumeroOficioCondusef").ToString()
                 OP.TipoPagoDetalle = row("TipoPagoDetalle").ToString()
                 OP.Cod_objeto = row("Cod_objeto").ToString()
+                OP.Poliza = row("Poliza").ToString()
 
 
 

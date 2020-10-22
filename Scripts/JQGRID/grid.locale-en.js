@@ -2,6 +2,7 @@
 /**
  * jqGrid English Translation
  * Tony Tomov tony@trirand.com
+
  * http://trirand.com/blog/ 
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
@@ -10,97 +11,102 @@
 $.jgrid = $.jgrid || {};
 $.extend($.jgrid,{
 	defaults : {
-		recordtext: "View {0} - {1} of {2}",
-		emptyrecords: "No records to view",
-		loadtext: "Loading...",
-		pgtext : "Page {0} of {1}"
+        recordtext: "Mostrando {0} - {1} de {2}",
+        emptyrecords: "Sin registros que mostrar",
+        loadtext: "Cargando...",
+		pgtext : "Pagina {0} de {1}"
 	},
 	search : {
-		caption: "Search...",
-		Find: "Find",
-		Reset: "Reset",
+        caption: "Búsqueda...",
+        Find: "Buscar",
+        Reset: "Limpiar",
 		odata: [{ oper:'eq', text:'equal'},{ oper:'ne', text:'not equal'},{ oper:'lt', text:'less'},{ oper:'le', text:'less or equal'},{ oper:'gt', text:'greater'},{ oper:'ge', text:'greater or equal'},{ oper:'bw', text:'begins with'},{ oper:'bn', text:'does not begin with'},{ oper:'in', text:'is in'},{ oper:'ni', text:'is not in'},{ oper:'ew', text:'ends with'},{ oper:'en', text:'does not end with'},{ oper:'cn', text:'contains'},{ oper:'nc', text:'does not contain'},{ oper:'nu', text:'is null'},{ oper:'nn', text:'is not null'}],
 		groupOps: [{ op: "AND", text: "all" },{ op: "OR",  text: "any" }],
-		operandTitle : "Click to select search operation.",
-		resetTitle : "Reset Search Value"
+        operandTitle: "Clic para seleccionar la operación de búsqueda.",
+        resetTitle: "Reiniciar valores de búsqueda"
 	},
 	edit : {
-		addCaption: "Add Record",
-		editCaption: "Edit Record",
-		bSubmit: "Submit",
-		bCancel: "Cancel",
-		bClose: "Close",
-		saveData: "Data has been changed! Save changes?",
-		bYes : "Yes",
+        addCaption: "Agregar registro",
+        editCaption: "Modificar registro",
+        bSubmit: "Guardar",
+        bCancel: "Cancelar",
+        bClose: "Cerrar",
+        saveData: "Se han modificado los datos, ¿guardar cambios?",
+		bYes : "Si",
 		bNo : "No",
-		bExit : "Cancel",
+		bExit : "Cancelar",
 		msg: {
-			required:"Field is required",
-			number:"Please, enter valid number",
-			minValue:"value must be greater than or equal to ",
-			maxValue:"value must be less than or equal to",
-			email: "is not a valid e-mail",
-			integer: "Please, enter valid integer value",
-			date: "Please, enter valid date value",
-			url: "is not a valid URL. Prefix required ('http://' or 'https://')",
-			nodefined : " is not defined!",
-			novalue : " return value is required!",
-			customarray : "Custom function should return array!",
-			customfcheck : "Custom function should be present in case of custom checking!"
+            required:"Campo obligatorio",
+            number:"Introduzca un número",
+            minValue:"El valor debe ser mayor o igual a ",
+            maxValue:"El valor debe ser menor o igual a ",
+            email: "no es una dirección de correo válida ",
+            integer: "Introduzca un valor entero ",
+            date: "Introduzca una fecha correcta ",
+            url: "no es una URL válida. Prefijo requerido ('http://' or 'https://')",
+            nodefined: " no está definido.",
+            novalue: " valor de retorno es requerido.",
+            customarray: "La función personalizada debe devolver un array.",
+            customfcheck: "La función personalizada debe estar presente en el caso de validación personalizada. "
 			
 		}
 	},
 	view : {
-		caption: "View Record",
+        caption: "Consultar registro",
 		bClose: "Close"
 	},
 	del : {
-		caption: "Delete",
-		msg: "Delete selected record(s)?",
-		bSubmit: "Delete",
-		bCancel: "Cancel"
+        caption: "Eliminar",
+        msg: "Desea eliminar el registro seleccionado?",
+        bSubmit: "Eliminar",
+		bCancel: "Cancelar"
 	},
 	nav : {
 		edittext: "",
-		edittitle: "Edit selected row",
+        edittitle: "Modificar fila seleccionada",
 		addtext:"",
-		addtitle: "Add new row",
+        addtitle: "Agregar nueva fila",
 		deltext: "",
-		deltitle: "Delete selected row",
+        deltitle: "Eliminar fila seleccionada",
 		searchtext: "",
-		searchtitle: "Find records",
+        searchtitle: "Buscar información",
 		refreshtext: "",
-		refreshtitle: "Reload Grid",
-		alertcap: "Warning",
-		alerttext: "Please, select row",
+        refreshtitle: "Recargar datos",
+        alertcap: "Aviso",
+        alerttext: "Seleccione una fila",
 		viewtext: "",
-		viewtitle: "View selected row"
+        viewtitle: "Ver fila seleccionada",
+        savetext: "",
+        savetitle: "Guardar fila",
+        canceltext: "",
+        canceltitle: "Cancelar edición de fila",
+        selectcaption: "Acciones..."
 	},
 	col : {
-		caption: "Select columns",
-		bSubmit: "Ok",
-		bCancel: "Cancel"
+        caption: "Mostrar/ocultar columnas",
+        bSubmit: "Enviar",
+        bCancel: "Cancelar"	
 	},
 	errors : {
-		errcap : "Error",
-		nourl : "No url is set",
-		norecords: "No records to process",
-		model : "Length of colNames <> colModel!"
+        errcap: "Error",
+        nourl: "No se ha especificado una URL",
+        norecords: "No hay datos para procesar",
+        model: "Las columnas de nombres son diferentes de las columnas del modelo"
 	},
 	formatter : {
 		integer : {thousandsSeparator: ",", defaultValue: '0'},
 		number : {decimalSeparator:".", thousandsSeparator: ",", decimalPlaces: 2, defaultValue: '0.00'},
 		currency : {decimalSeparator:".", thousandsSeparator: ",", decimalPlaces: 2, prefix: "", suffix:"", defaultValue: '0.00'},
 		date : {
-			dayNames:   [
-				"Sun", "Mon", "Tue", "Wed", "Thr", "Fri", "Sat",
-				"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-			],
-			monthNames: [
-				"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-				"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-			],
-			AmPm : ["am","pm","AM","PM"],
+            dayNames: [
+                "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa",
+                "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"
+            ],
+            monthNames: [
+                "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic",
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ],
+            AmPm: ["am", "pm", "AM", "PM"],
 			S: function (j) {return j < 11 || j > 13 ? ['st', 'nd', 'rd', 'th'][Math.min((j - 1) % 10, 3)] : 'th';},
 			srcformat: 'Y-m-d',
 			newformat: 'n/j/Y',
@@ -165,6 +171,18 @@ $.extend($.jgrid,{
 		target: '',
 		checkbox : {disabled:true},
 		idName : 'id'
-	}
+    },
+    colmenu: {
+        sortasc: "Orden Ascendente",
+        sortdesc: "Orden Descendente",
+        columns: "Columnas",
+        filter: "Filtrar",
+        grouping: "Agrupar por",
+        ungrouping: "Desagrupar",
+        searchTitle: "Obtener elementos con un valor que:",
+        freeze: "Inmovilizar",
+        unfreeze: "Movilizar",
+        reorder: "Mover para reordenar"
+    }
 });
 })(jQuery);

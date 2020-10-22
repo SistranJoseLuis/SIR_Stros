@@ -50,7 +50,18 @@ Public Class OrdenPagoMasiva
                 oParametros.Add("Num_Pago", ValidarParametros(OP.Num_Pago))
                 oParametros.Add("id_Tipo_Doc", ValidarParametros(OP.Id_Tipo_Doc))
                 oParametros.Add("Tipo_comprobante", ValidarParametros(OP.Tipo_comprobante))
-                oParametros.Add("PagarA", ValidarParametros(OP.PagarA))
+
+
+                Select Case OP.PagarA
+                    Case "Asegurado"
+                        oParametros.Add("PagarA", "7")
+                    Case "Tercero"
+                        oParametros.Add("PagarA", "8")
+                    Case "Proveedor"
+                        oParametros.Add("PagarA", "10")
+                End Select
+
+
                 oParametros.Add("CodigoCliente", ValidarParametros(OP.CodigoCliente))
                 oParametros.Add("RFC", ValidarParametros(OP.RFC))
                 oParametros.Add("Nombre_Razon_Social", ValidarParametros(OP.Nombre_Razon_Social))
@@ -97,7 +108,6 @@ Public Class OrdenPagoMasiva
                 oParametros.Add("CodigoBancoTransferencia", ValidarParametros(OP.CodigoBancoTransferencia))
 
 
-
                 oParametros.Add("IdSiniestro", ValidarParametros(OP.IdSiniestro))
                 oParametros.Add("CodigoTercero", ValidarParametros(OP.CodigoTercero))
                 oParametros.Add("Subtotal", ValidarParametros(OP.Subtotal))
@@ -112,6 +122,7 @@ Public Class OrdenPagoMasiva
                 oParametros.Add("NumeroOficioCondusef", ValidarParametros(OP.NumeroOficioCondusef))
                 oParametros.Add("TipoPagoDetalle", ValidarParametros(OP.TipoPagoDetalle))
                 oParametros.Add("Cod_objeto", ValidarParametros(OP.Cod_objeto))
+                oParametros.Add("Poliza", ValidarParametros(OP.Poliza))
 
 
 
@@ -210,7 +221,15 @@ Public Class OrdenPagoMasiva
                 OP.Folio_Onbase = "<a href=""VisordeContenido.aspx ""  target=""_blank""><i class=""fa fa-newspaper-o""></i>&nbsp; " + row("Folio_Onbase").ToString() + "</a>"
                 OP.Num_Pago = row("Num_Pago").ToString()
                 OP.Tipo_comprobante = row("Tipo_comprobante").ToString()
-                OP.PagarA = row("PagarA").ToString()
+                Select Case row("PagarA").ToString()
+                    Case "7"
+                        OP.PagarA = "Asegurado"
+                    Case "8"
+                        OP.PagarA = "Tercero"
+                    Case "10"
+                        OP.PagarA = "Proveedor"
+                End Select
+
                 OP.CodigoCliente = row("CodigoCliente").ToString()
                 OP.RFC = row("RFC").ToString()
                 OP.Nombre_Razon_Social = row("Nombre_Razon_Social").ToString()
@@ -272,6 +291,7 @@ Public Class OrdenPagoMasiva
                 OP.Cod_concepto_pago = row("Cod_concepto_pago").ToString()
                 OP.Cod_clas_pago = row("Cod_clas_pago").ToString()
                 OP.Cod_tipo_pago = row("Cod_tipo_pago").ToString()
+                OP.Poliza = row("Poliza").ToString()
 
                 lstOp.Add(OP)
 

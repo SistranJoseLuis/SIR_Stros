@@ -34,6 +34,9 @@
         var RFC = $("[id*=txtRFC]").val();
         var SubSiniestro = $("[id*=cmbSubsiniestro]").val();
 
+
+        RFC = RFC.replace("&", "!");
+
         var cod_analista = $("[id*=cmbAnalistaSolicitante]").val();
         var VariasFacturas = $("[id*=chkVariasFacturas]").val();
         var FondosSinIVA = $("[id*=chkFondosSinIVA]").val();
@@ -321,8 +324,8 @@
             height: 280,
             width: 1024,
             rowNum: 8000,
-            rowList: [10, 20, 30],
-            colNames: ['Folio Onbase', 'Num Pago', 'Tipo de comprobante', 'Pagar A', 'Codigo', 'RFC', 'Nombre /Razon Social', 'Siniestro', 'Subsinientro', 'Moneda', 'Tipo de Cambio', 'Reserva', 'Moneda de Pago', 'Importe', 'Deducible', 'Importe del concepto', 'Conceptp Facturado', 'cod_concepto_pago', 'Concepto de pago','cod_clas_Pago' ,'Clase de Pago', 'cod_tipo_pago','Tipo de Pago', 'Concepto 2', 'Tipo de Pago', 'Folio Onbase Estado de cuenta', 'Cuenta Bancaria', 'Confirmar Cuenta ', 'Solicitante', 'Notas', 'Observaciones', 'id_tipo_Doc', 'moneda', 'moneda pago', 'FolioOnbaseHidden', 'Id_persona', '', '', , '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','','Accion'],
+            rowList: [10, 20, 30],           
+            colNames: ['Folio Onbase', 'Num Pago', 'Tipo de comprobante', 'Pagar A', 'Codigo', 'RFC', 'Nombre /Razon Social', 'Siniestro', 'Subsinientro', 'Moneda', 'Tipo de Cambio', 'Reserva', 'Moneda de Pago', 'Importe', 'Deducible', 'Importe del concepto', 'Conceptp Facturado', 'cod_concepto_pago', 'Concepto de pago','cod_clas_Pago' ,'Clase de Pago', 'cod_tipo_pago','Tipo de Pago', 'Concepto 2', 'Tipo de Pago', 'Folio Onbase Estado de cuenta', 'Cuenta Bancaria', 'Confirmar Cuenta ', 'Solicitante', 'Notas', 'Observaciones', 'id_tipo_Doc', 'moneda', 'moneda pago', 'FolioOnbaseHidden', 'Id_persona', '', '', , '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','','Poliza','Accion'],
             colModel: [
                 
                 { name: 'Folio_Onbase', index: 'Folio_Onbase', width: 100, frozen: false },
@@ -493,8 +496,8 @@
                 { name: 'Concepto2', index: 'Concepto2', width: 180, editable: true, hidden: true, editoptions: { size: "30", maxlength: "100" } },
                 { name: 'Tipo_Pago2', index: 'Tipo_Pago2', width: 90, hidden: true },
                 { name: 'Folio_Onbase_Cuenta', index: 'Folio_Onbase_Cuenta', width: 90 },
-                { name: 'Cuenta_Bancaria', index: 'Cuenta_Bancaria', width: 180, editable: true, editoptions: { size: "30", maxlength: "100" } },
-                { name: 'Confirmar_Cuenta', index: 'Confirmar_Cuenta', width: 180, editable: true, editoptions: { size: "30", maxlength: "100" } },
+                { name: 'Cuenta_Bancaria', index: 'Cuenta_Bancaria', width: 180, editable: true, editoptions: { size: "30", maxlength: "18" } },
+                { name: 'Confirmar_Cuenta', index: 'Confirmar_Cuenta', width: 180, editable: true, editoptions: { size: "30", maxlength: "18" } },
                 { name: 'Solicitante', index: 'Solicitante', width: 90 },
                 { name: 'Notas', index: 'Notas', width: 180, editable: true, editoptions: { size: "30", maxlength: "100" } },
                 { name: 'Observaciones', index: 'Observaciones', width: 260, editable: true, editoptions: { size: "50", maxlength: "100" } },
@@ -531,7 +534,7 @@
                 { name: 'NumeroOficioCondusef', index: 'NumeroOficioCondusef', width: 90, hidden: true },
                 { name: 'TipoPagoDetalle', index: 'TipoPagoDetalle', width: 90, hidden: true },
                 { name: 'Cod_objeto', index: 'Cod_objeto', width: 90, hidden: true },
-
+                { name: 'Poliza', index: 'Poliza', width: 90, hidden: false },
 
 
 
@@ -561,12 +564,29 @@
                     jQuery("#list47").restoreRow(lastSel);
                     lastSel = id;
                 }
-                
+
+
+                var TipoUsuario = jQuery("#list47").jqGrid('getRowData', id).PagarA;
+
+                if (TipoUsuario == "Proveedor") {
+                    jQuery("#list47").setColProp('Cuenta_Bancaria', { editable: false });
+                    jQuery("#list47").setColProp('Confirmar_Cuenta', { editable: false });
+
+                }
+                else {
+                    jQuery("#list47").setColProp('Cuenta_Bancaria', { editable: true });
+                    jQuery("#list47").setColProp('Confirmar_Cuenta', { editable: true });
+
+                }
+
+
+
                 jQuery("#list47").editRow(id, true, null, null, '../LocalServices/OrdenPagoMasiva.asmx/Apoyo', null,
                     function (rowid, response) {  // aftersavefunc
                       //  grid.setColProp('State', { editoptions: { value: states } });
 
-                        
+                        jQuery("#list47").setColProp('Cuenta_Bancaria', { editable: false });
+                        jQuery("#list47").setColProp('Confirmar_Cuenta', { editable: false });                                               
                         
                     });
                 return;

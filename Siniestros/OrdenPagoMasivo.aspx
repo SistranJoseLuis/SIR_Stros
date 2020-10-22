@@ -25,7 +25,6 @@
     <script src="../Scripts/JQGRID/jquery.jqGrid.js" type="text/javascript"></script>
 
 
-
     
 
     <div class="zona-principal" style="overflow-x: hidden; overflow-y: hidden">
@@ -242,7 +241,7 @@
             <a id="btn_Enviar" runat="server" class="btn botones pull-right hidden" data-toggle="modal" data-target="#Modal"  disabled>
                                    <span>
                                         <i class="fa fa-arrow-circle-up"></i>&nbsp;
-                                        Enviar
+                                        Generar
                                     </span>
                                     </a>
 
@@ -273,7 +272,7 @@
         <div id="Modal"  class="modal-catalogo" >
             <div class="cuadro-titulo-flotante">
                 <button type="button" data-dismiss="modal" class="close">&times;</button>
-                <div><label id="lbl_Catalogo">Generacion de Ordenes de Trabajo</label></div>
+                <div><label id="lbl_Catalogo">Generacion de Ordenes de Pago</label></div>
             </div>
             <div class="clear padding5"></div>
             <asp:UpdatePanel runat="server" ID="upCatalogo">

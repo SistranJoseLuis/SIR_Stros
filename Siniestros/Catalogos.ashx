@@ -22,6 +22,7 @@ Public Class Prueba : Implements IHttpHandler
         Dim CodigoPres As String
         Dim FolioOnbase As String
 
+
         Catalgo = context.Request.QueryString("Catalgo")
 
         Dim OP As New OrdenPagoMasivoClass
@@ -39,6 +40,17 @@ Public Class Prueba : Implements IHttpHandler
                 TipoUsuario = context.Request.QueryString("TipoUsuario")
                 id_tipo_pago = context.Request.QueryString("id_tipo_pago")
                 CodigoPres = context.Request.QueryString("CodigoPres")
+
+
+                Select Case TipoUsuario
+                    Case "Asegurado"
+                        TipoUsuario = "7"
+                    Case "Tercero"
+                        TipoUsuario = "8"
+                    Case "Proveedor"
+                        TipoUsuario = "10"
+                End Select
+
 
                 oParametros.Add("TipoUsuario", TipoUsuario)
                 oParametros.Add("id_tipo_pago", id_tipo_pago)
@@ -62,6 +74,19 @@ Public Class Prueba : Implements IHttpHandler
                 oParametros.Add("Fondos", "1")
                 oDatos = Funciones.ObtenerDatos("usp_ObtenerConceptosPagoMasivo_stro", oParametros)
                 oTabla = oDatos.Tables(0)
+            Case "FigurasPoliza"
+                Dim param As String
+                Dim poliza As String
+                poliza = context.Request.QueryString("Poliza")
+                param = Replace(poliza, "-", ",")
+
+
+
+                Funciones.fn_Consulta("SELECT DISTINCT cod_aseg, nombre FROM f_aseg_poliza(" & param & ") ", oTabla)
+
+
+
+
         End Select
 
 

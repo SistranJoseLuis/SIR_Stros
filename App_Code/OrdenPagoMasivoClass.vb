@@ -73,7 +73,7 @@ Public Class OrdenPagoMasivoClass
     Private _Cod_tipo_pago As String
     Private _Poliza As String
 
-
+    'Prueba
 
 
     Public Property Folio_Onbase As String
